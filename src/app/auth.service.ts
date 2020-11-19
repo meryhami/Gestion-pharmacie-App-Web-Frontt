@@ -25,10 +25,23 @@ export class AuthService {
     
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
+  async SignUp(email, password) {
+    const credential = await   this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      
+      console.log(credential.user);
+    
+  }
+  async SignIn(email, password) {
+    const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    console.log(credential.user);
 
+
+
+  }
   logout() { 
     this.afAuth.auth.signOut();
-  }
+    window.location.reload();
+    }
 
   get appUser$() : Observable<AppUser> {
     return this.user$

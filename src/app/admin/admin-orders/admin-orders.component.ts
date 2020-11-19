@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { OrdersService } from './../../orders.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-orders.component.css']
 })
 export class AdminOrdersComponent implements OnInit {
-
-  constructor() { }
+orders={};
+  constructor(private adminorder: OrdersService,private Router: Router) { }
 
   ngOnInit() {
-  }
+    this.adminorder.getAll().subscribe(
 
+      data=>this.orders=data.json()
+    )
+  }
+  see(id)
+  {
+this.Router.navigate(['admin/bills/',id]);
+  }
 }
